@@ -1,6 +1,6 @@
 import { AddTool } from '../../domain/useCases/addTool';
 import { MissingParamError } from '../errors';
-import { badRequest, ok, serverError } from '../helpers/http';
+import { badRequest, created, serverError } from '../helpers/http';
 import { Controller, HttpRequest, HttpResponse } from '../protocols';
 
 export class AddToolController implements Controller {
@@ -17,7 +17,7 @@ export class AddToolController implements Controller {
         }
       }
       const tool = await this.addTool.add(body);
-      return ok(tool);
+      return created(tool);
     } catch (error) {
       return serverError();
     }

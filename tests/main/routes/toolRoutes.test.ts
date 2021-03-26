@@ -21,6 +21,6 @@ describe('CarShop Routes', () => {
       link: 'any_link',
       description: 'any_description',
       tags: ['any_tag'],
-    }).expect(200);
+    }).expect(201);
   });
 });

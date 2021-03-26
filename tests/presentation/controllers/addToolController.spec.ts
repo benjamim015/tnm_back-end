@@ -2,7 +2,7 @@ import { ToolModel } from '../../../src/domain/models/tool';
 import { AddTool, AddToolParams } from '../../../src/domain/useCases/addTool';
 import { AddToolController } from '../../../src/presentation/controllers/addToolController';
 import { MissingParamError } from '../../../src/presentation/errors';
-import { badRequest, ok, serverError } from '../../../src/presentation/helpers/http';
+import { badRequest, created, serverError } from '../../../src/presentation/helpers/http';
 import { HttpRequest } from '../../../src/presentation/protocols';
 
 const makeFakeTool = (): ToolModel => ({
@@ -67,7 +67,7 @@ describe('AddToolController', () => {
   it('Should return 200 if valid data is provided', async () => {
     const { sut } = makeSut();
     const httpResponse = await sut.handle(makeFakeRequest());
-    expect(httpResponse).toEqual(ok(makeFakeTool()));
+    expect(httpResponse).toEqual(created(makeFakeTool()));
   });
 
   it('Should return 500 if AddTool throws', async () => {
