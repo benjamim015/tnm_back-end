@@ -10,7 +10,9 @@
     "test:unit": "yarn test --watch -c jest.unit.config.js",
     "test:integration": "yarn test --watch -c jest.integration.config.js",
     "test:staged": "yarn test --findRelatedTests",
-    "test:ci": "yarn test --coverage --no-cache"
+    "test:ci": "yarn test --coverage --no-cache",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+    "typeorm:dev": "NODE_ENV=test ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "devDependencies": {
     "@types/jest": "^26.0.21",
@@ -24,6 +26,12 @@
     "jest": "^26.6.3",
     "lint-staged": "^10.5.4",
     "ts-jest": "^26.5.4",
+    "ts-node-dev": "^1.1.6",
     "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "pg": "^8.5.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.31"
   }
 }
