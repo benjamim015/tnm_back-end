@@ -64,7 +64,7 @@ describe('AddToolController', () => {
     expect(addSpy).toHaveBeenCalledWith({ ...makeFakeRequest().body });
   });
 
-  it('Should return 200 if valid data is provided', async () => {
+  it('Should return 201 if valid data is provided', async () => {
     const { sut } = makeSut();
     const httpResponse = await sut.handle(makeFakeRequest());
     expect(httpResponse).toEqual(created(makeFakeTool()));
