@@ -5,11 +5,19 @@ import { ToolTypeORMRepository } from '../../../../../src/infra/orm/typeorm/repo
 const makeFakeTools = async () => {
   const toolRepository = TypeORMHelper.instance.getRepository(Tool);
   const tool1 = toolRepository.create({
-    title: 'any_title', link: 'any_link', description: 'any_description', tags: ['any_tag'],
+    id: 'any_id',
+    title: 'any_title',
+    link: 'any_link',
+    description: 'any_description',
+    tags: ['any_tag'],
   });
   await toolRepository.save(tool1);
   const tool2 = toolRepository.create({
-    title: 'other_title', link: 'other_link', description: 'other_description', tags: ['other_tag'],
+    id: 'other_id',
+    title: 'other_title',
+    link: 'other_link',
+    description: 'other_description',
+    tags: ['other_tag'],
   });
   await toolRepository.save(tool2);
 };
@@ -77,6 +85,16 @@ describe('Tool TypeORM Repository', () => {
       const tools = await sut.loadByTag('any_tag');
       expect(tools).toBeTruthy();
       expect(tools[0]).toHaveProperty('tags', ['any_tag']);
+    });
+  });
+
+  describe('removeById()', () => {
+    it('Should remove a tool on success', async () => {
+      await makeFakeTools();
+      const { sut } = makeSut();
+      await sut.removeById('any_id');
+      const tools = await TypeORMHelper.instance.getRepository(Tool).find();
+      expect(tools).toHaveLength(1);
     });
   });
 });
