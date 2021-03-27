@@ -6,8 +6,10 @@ console.log("DATABASE_URL > ", process.env.DATABASE_URL);
 if (process.env.DATABASE_URL) {
   module.exports = {
     type: 'postgres',
-    url: 'postgres://easyevmipblpzf:c28c083388620ab4ba57380e8a89d17a7e14dfbc5ff8c73f3b1c9775751b4dd1@ec2-54-145-102-149.compute-1.amazonaws.com:5432/d3tk04ks91b85r',
-    ssl: true,
+    url: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    },
     entities: [`./${dir}/infra/orm/typeorm/entities/*.${extension}`],
     migrations: [`./${dir}/infra/orm/typeorm/migrations/*.${extension}`],
     cli: {
