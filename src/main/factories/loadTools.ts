@@ -1,3 +1,4 @@
+import { DbLoadToolByTag } from '../../data/useCases/dbLoadToolByTag';
 import { DbLoadTools } from '../../data/useCases/dbLoadTools';
 import { ToolTypeORMRepository } from '../../infra/orm/typeorm/repositories/toolRepository';
 import { LoadToolsController } from '../../presentation/controllers/loadToolsController';
@@ -5,5 +6,6 @@ import { LoadToolsController } from '../../presentation/controllers/loadToolsCon
 export const makeLoadToolsController = (): LoadToolsController => {
   const toolTypeORMRepository = new ToolTypeORMRepository();
   const dbLoadTools = new DbLoadTools(toolTypeORMRepository);
-  return new LoadToolsController(dbLoadTools);
+  const dbLoadToolByTag = new DbLoadToolByTag(toolTypeORMRepository);
+  return new LoadToolsController(dbLoadTools, dbLoadToolByTag);
 };

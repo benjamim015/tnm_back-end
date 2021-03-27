@@ -11,6 +11,7 @@
     }],
     "no-restricted-syntax": "off",
     "no-await-in-loop": "off",
-    "max-len": "off"
+    "max-len": "off",
+    "max-classes-per-file": "off"
   }
 }

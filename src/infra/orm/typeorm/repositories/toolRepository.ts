@@ -22,7 +22,7 @@ export class ToolTypeORMRepository implements AddToolRepository, LoadToolsReposi
 
   async loadByTag(tag: string): Promise<ToolModel[]> {
     const toolRepository = TypeORMHelper.instance.getRepository(Tool);
-    const tools = await toolRepository.query(`SELECT * FROM tools WHERE array_to_string(tags, ',') LIKE '%${tag}%'`);
+    const tools = await toolRepository.query(`SELECT * FROM tools WHERE LOWER(array_to_string(tags, ',')) LIKE '%${tag.toLowerCase()}%'`);
     return tools;
   }
 }
