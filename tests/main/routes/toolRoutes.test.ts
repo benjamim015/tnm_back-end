@@ -6,11 +6,19 @@ import app from '../../../src/main/config/app';
 const makeFakeTools = async () => {
   const toolRepository = TypeORMHelper.instance.getRepository(Tool);
   const tool1 = toolRepository.create({
-    title: 'any_title', link: 'any_link', description: 'any_description', tags: ['any_tag'],
+    id: 'any_id',
+    title: 'any_title',
+    link: 'any_link',
+    description: 'any_description',
+    tags: ['any_tag'],
   });
   await toolRepository.save(tool1);
   const tool2 = toolRepository.create({
-    title: 'other_title', link: 'other_link', description: 'other_description', tags: ['other_tag'],
+    id: 'other_id',
+    title: 'other_title',
+    link: 'other_link',
+    description: 'other_description',
+    tags: ['other_tag'],
   });
   await toolRepository.save(tool2);
 };
@@ -55,6 +63,16 @@ describe('CarShop Routes', () => {
       expect(httpResponse.status).toEqual(200);
       expect(httpResponse.body).toHaveLength(1);
       expect(httpResponse.body[0].tags[0]).toEqual('any_tag');
+    });
+  });
+
+  describe('DELETE /tools/:id', () => {
+    it('Should remove a tool on success', async () => {
+      await makeFakeTools();
+      const httpResponse = await request(app).delete('/api/tools/any_id');
+      const tools = await TypeORMHelper.instance.getRepository(Tool).find();
+      expect(tools).toHaveLength(1);
+      expect(httpResponse.status).toEqual(204);
     });
   });
 });
