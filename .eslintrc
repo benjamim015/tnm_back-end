@@ -10,6 +10,7 @@
       "argsIgnorePattern": "_"
     }],
     "no-restricted-syntax": "off",
-    "no-await-in-loop": "off"
+    "no-await-in-loop": "off",
+    "max-len": "off"
   }
 }
