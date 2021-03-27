@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  api:
+    container_name: TNM-api
+    image: node:lts
+    working_dir: /usr/src/api
+    command: sh -c "yarn --only=prod && NODE_ENV=prod node dist/main/server.js"
+    env_file:
+      - .env
+    volumes:
+      - ./dist/:/usr/src/api/dist
+      - ./package.json:/usr/src/api/package.json
+      - ./yarn.lock:/usr/src/api/yarn.lock
+      - ./ormconfig.js:/usr/src/api/ormconfig.js
+    ports:
+      - 3000:3000
+    links:
+      - postgres
+
+  postgres:
+    container_name: TNM-postgres
+    build:
+      context: ./postgres
+      dockerfile: Dockerfile
+    volumes:
+      - tnm-postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  tnm-postgres-data:
