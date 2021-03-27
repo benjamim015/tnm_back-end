@@ -69,4 +69,14 @@ describe('Tool TypeORM Repository', () => {
       expect(tools[1]).toHaveProperty('title', 'other_title');
     });
   });
+
+  describe('loadByTag()', () => {
+    it('Should return all tools that contain the tag on success', async () => {
+      await makeFakeTools();
+      const { sut } = makeSut();
+      const tools = await sut.loadByTag('any_tag');
+      expect(tools).toBeTruthy();
+      expect(tools[0]).toHaveProperty('tags', ['any_tag']);
+    });
+  });
 });
