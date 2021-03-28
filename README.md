@@ -12,7 +12,7 @@ git clone https://github.com/benjamim015/tnm_back-end
 
 cd tnm_back-end
 
-docker-compose up -d
-or
+yarn install
+
 yarn start:docker
 ```
