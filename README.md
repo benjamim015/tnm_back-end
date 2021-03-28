@@ -15,4 +15,6 @@ cd tnm_back-end
 yarn install
 
 yarn start:docker
+
+*May be necessary to wait some time for the API to start
 ```
